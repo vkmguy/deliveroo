@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cron:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cron_jar</output-path>
+    <root id="archive" name="cron.jar">
+      <element id="module-output" name="cron" />
+    </root>
+  </artifact>
+</component>
