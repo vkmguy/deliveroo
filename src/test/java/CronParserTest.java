@@ -1,14 +1,15 @@
-import junit.framework.TestCase;
+
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.BitSet;
 
-public class CronParserTest extends TestCase {
+public class CronParserTest {
 
     @Test
     public void testMinutesFieldParser() throws InvalidTokenException {
-        CronParser parser = new CronParser(CronField.MINUTE.MINUTE);
+        CronParser parser = new CronParser(CronField.MINUTE);
         BitSet bitSet = parser.parse("*");
         Assert.assertEquals(60, bitSet.cardinality());
         bitSet = parser.parse("6");

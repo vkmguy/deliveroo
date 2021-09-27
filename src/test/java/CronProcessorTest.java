@@ -1,5 +1,3 @@
-import junit.framework.TestCase;
-
-public class CronProcessorTest extends TestCase {
+public class CronProcessorTest {
 
 }

@@ -169,7 +169,6 @@ public class CronParser {
 
     private BitSet parseLiteral(String token) throws InvalidTokenException {
         BitSet bitSet = new BitSet(this.length);
-        try {
             int number = this.parseValue(token);
             if (number < 0) {
                 throw new InvalidTokenException(
@@ -186,9 +185,6 @@ public class CronParser {
                                 this.name, token, this.name, this.max));
             }
             bitSet.set(number - this.min);
-        } catch (NumberFormatException ex) {
-            throw new InvalidTokenException(String.format("invalid %s field: \"%s\"", this.name, token), ex);
-        }
         return bitSet;
     }
 }
