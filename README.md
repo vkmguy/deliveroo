@@ -20,8 +20,8 @@ In particular the following still can be improved:
 ## Build instructions
 Maven is used to build the project
 After Maven installed and project is check out from the repository, execute the following command:
--- mvn clean install
+mvn clean install
 
 ### Run instructions:
  In command line execute:
- java -jar cron-1.0-SNAPSHOT.jar "CRON_EXPRESSION"
+ java -jar cron-1.0-SNAPSHOT.jar **"CRON_EXPRESSION"**
