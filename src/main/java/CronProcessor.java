@@ -42,11 +42,11 @@ public class CronProcessor {
     }
 
     public static String convertString() {
-        return "MINUTES: "+ CRON.convertToString(CRON.getMinutes(),false)+"\n"
-                + "HOUR: "+ CRON.convertToString(CRON.getHours(),false)+"\n"
-                + "DAY OF MONTH: "+ CRON.convertToString(CRON.getDays(),true)+"\n"
-                + "MONTH: "+ CRON.convertToString(CRON.getMonths(),true)+"\n"
-                + "DAY OF WEEK: "+ CRON.convertToString(CRON.getDaysOfWeek(),true)+"\n"
+        return "MINUTES: "+ CRON.convertToString(CRON.getMinutes(),CronField.MINUTE)+"\n"
+                + "HOUR: "+ CRON.convertToString(CRON.getHours(),CronField.HOUR)+"\n"
+                + "DAY OF MONTH: "+ CRON.convertToString(CRON.getDays(),CronField.DAY)+"\n"
+                + "MONTH: "+ CRON.convertToString(CRON.getMonths(),CronField.MONTH)+"\n"
+                + "DAY OF WEEK: "+ CRON.convertToString(CRON.getDaysOfWeek(),CronField.DAY_OF_WEEK)+"\n"
                 + "FILENAME: "+ CRON.getFileName();
     }
 }

@@ -58,11 +58,10 @@ public class Cron {
         this.fileName = fileName;
     }
 
-    public String convertToString(BitSet bitSet, boolean isRangeDifferentThanBitSet){
+    public String convertToString(BitSet bitSet, CronField cronField){
         StringBuilder result = new StringBuilder();
         for (int i=bitSet.nextSetBit(0);i>=0;i=bitSet.nextSetBit(i+1)){
-            if(isRangeDifferentThanBitSet) result.append(i+1+" ");
-            else result.append(i+" ");
+            result.append(i+cronField.getMin()+" ");
             if(i==Integer.MAX_VALUE) break;
         }
         return new String(result);

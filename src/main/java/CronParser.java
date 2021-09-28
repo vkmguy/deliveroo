@@ -3,44 +3,16 @@ import java.util.Locale;
 
 public class CronParser {
 
-    private String name;
-    private int min;
-    private int max;
-    private int length;
+    private final String name;
+    private final int min;
+    private final int max;
+    private final int length;
 
     public CronParser(CronField cronField) {
-        switch (cronField){
-            case MINUTE:
-                this.name = cronField.toString().toLowerCase(Locale.ROOT);
-                this.min = 0;
-                this.max = 59;
-                this.length = 60;
-                break;
-            case HOUR:
-                this.name = cronField.toString().toLowerCase(Locale.ROOT);
-                this.min = 0;
-                this.max = 23;
-                this.length = 24;
-                break;
-            case DAY:
-                this.name = cronField.toString().toLowerCase(Locale.ROOT);
-                this.min = 1;
-                this.max = 31;
-                this.length = 31;
-                break;
-            case MONTH:
-                this.name = cronField.toString().toLowerCase(Locale.ROOT);
-                this.min = 1;
-                this.max = 12;
-                this.length = 12;
-                break;
-            case DAY_OF_WEEK:
-                this.name = cronField.toString().toLowerCase(Locale.ROOT);
-                this.min = 1;
-                this.max = 7;
-                this.length = 7;
-                break;
-        }
+        this.name = cronField.toString().toLowerCase(Locale.ROOT);
+        this.min = cronField.getMin();
+        this.max = cronField.getMax();
+        this.length = cronField.getLength();
     }
 
     private boolean isInteger(String str) {
