@@ -65,12 +65,20 @@ public class CronParser {
         return value;
     }
 
-    private int findDayOrMonthNumber(String token) {
+    private int findDayOrMonthNumber(String token) throws InvalidTokenException {
         int number = -1;
         if(this.name.equals(CronField.MONTH.toString().toLowerCase(Locale.ROOT)))
-            number = MonthName.valueOf(token).getMonthNumber();
+            try{
+                number = MonthName.valueOf(token).getMonthNumber();
+            }catch (IllegalArgumentException ex){
+                throw new InvalidTokenException(String.format("invalid %s field: \"%s\"", this.name, token));
+            }
         if(this.name.equals(CronField.DAY_OF_WEEK.toString().toLowerCase(Locale.ROOT)))
-            number = DayOfWeek.valueOf(token).getDayNumber();
+            try{
+                number = DayOfWeek.valueOf(token).getDayNumber();
+            }catch (IllegalArgumentException ex){
+                throw new InvalidTokenException(String.format("invalid %s field: \"%s\"", this.name, token));
+            }
         return number;
     }
 
