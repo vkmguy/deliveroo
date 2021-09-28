@@ -8,6 +8,7 @@ public class Cron {
     private BitSet months;
     private BitSet daysOfWeek;
     private String fileName;
+    private CronField cronField;
 
     public BitSet getMinutes() {
         return minutes;

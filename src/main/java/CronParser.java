@@ -56,13 +56,26 @@ public class CronParser {
         int value;
         if (this.isInteger(token)) {
             value = Integer.parseInt(token);
-        } else {
+        }else if(token.chars().allMatch(Character::isLetter)) {
+            value = findDayOrMonthNumber(token);
+            if(value == -1) throw new InvalidTokenException(String.format("invalid %s field: \"%s\"", this.name, token));
+        }else{
             throw new InvalidTokenException(String.format("invalid %s field: \"%s\"", this.name, token));
         }
         return value;
     }
 
+    private int findDayOrMonthNumber(String token) {
+        int number = -1;
+        if(this.name.equals(CronField.MONTH.toString().toLowerCase(Locale.ROOT)))
+            number = MonthName.valueOf(token).getMonthNumber();
+        if(this.name.equals(CronField.DAY_OF_WEEK.toString().toLowerCase(Locale.ROOT)))
+            number = DayOfWeek.valueOf(token).getDayNumber();
+        return number;
+    }
+
     public BitSet parse(String token) throws InvalidTokenException {
+
         if (token.contains(",")) {
             BitSet bitSet = new BitSet(this.length);
             String[] items = token.split(",");
@@ -98,8 +111,8 @@ public class CronParser {
                                 this.name, token));
             }
             String numSetPart = tokenParts[0];
-            if (!numSetPart.contains("-") && !numSetPart.equals("*") && isInteger(numSetPart)) {
-                numSetPart = String.format("%s-%d", numSetPart, this.max);
+            if (!numSetPart.contains("-") && !numSetPart.equals("*")) {
+                numSetPart = String.format("%s-%d", this.parseValue(numSetPart), this.max);
             }
             BitSet numSet = this.parse(numSetPart);
             BitSet stepsSet = new BitSet(this.length);
@@ -121,7 +134,6 @@ public class CronParser {
         try {
             int from;
             int to;
-
             from = this.parseValue(rangeParts[0]);
             if (from < 0) {
                 throw new InvalidTokenException(
